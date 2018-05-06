@@ -16,9 +16,9 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b/badge.svg)](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b)
 
 # Credit
-This bundle is heavily based based upon the [OrangeRT/AnonymizeBundle](https://github.com/OrangeRT/AnonymizeBundle) bundle created by Sander Verkuil, so credit where credit is due.
+This bundle is a stripped down version of the [OrangeRT/AnonymizeBundle](https://github.com/OrangeRT/AnonymizeBundle) package created by OrangeRT, so I'm hereby giving credit where credit is due.
 
-I've forked their project and stripped it, so that I could use it to anonymize data per entity, instead of the whole entity, which is what I needed for a personal project.
+I've forked their project and stripped it, so that I could use it to anonymize data per entity, instead of the whole database.
 
 # Contents
 - [Installation](#installation)
