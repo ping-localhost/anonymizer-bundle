@@ -15,6 +15,11 @@ class AnonymizedMethodMetadata extends MethodMetadata
      */
     private $arguments = [];
 
+    public function __construct(string $class, string $name)
+    {
+        parent::__construct($class, $name);
+    }
+
     public function getArguments(): array
     {
         return $this->arguments;
@@ -25,8 +30,8 @@ class AnonymizedMethodMetadata extends MethodMetadata
         $this->arguments = $arguments;
     }
 
-    public function invoke($obj, array $args = [])
+    public function invoke($object, array $arguments = [])
     {
-        return parent::invoke($obj, $this->arguments);
+        return parent::invoke($object, $this->arguments);
     }
 }

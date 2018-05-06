@@ -10,7 +10,7 @@ use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Entity\Entity;
 use PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class EnumTranslationTest extends KernelTestCase
+class AnonymizeProcessorTest extends KernelTestCase
 {
     /**
      * @var AnonymizeProcessor
@@ -26,8 +26,15 @@ class EnumTranslationTest extends KernelTestCase
 
     public function testAnonymizer(): void
     {
-        $entity = new Entity('PHPUnit');
-        $this->anonymizer->anonymize($entity);
-        self::assertNotEquals('PHPUnit', $entity->getUsername());
+        $unchanged_entity = new Entity('PHPUnit', 'email@example.com');
+        $changed_entity = new Entity('PHPUnit', 'email@not-example.com');
+
+        $this->anonymizer->anonymize($unchanged_entity);
+        self::assertEquals('PHPUnit', $unchanged_entity->getUsername());
+        self::assertEquals('email@example.com', $unchanged_entity->getEmail());
+
+        $this->anonymizer->anonymize($changed_entity);
+        self::assertNotEquals('PHPUnit', $changed_entity->getUsername());
+        self::assertNotEquals('email@example.com', $changed_entity->getEmail());
     }
 }

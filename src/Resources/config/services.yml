@@ -5,8 +5,13 @@ services:
     PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver:
         class: 'PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver'
         arguments:
-          - '@Doctrine\Common\Annotations\AnnotationReader'
+          - '@PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
           - '%ping_localhost.anonymizer_bundle.default_locale%'
+
+    PingLocalhost\AnonymizerBundle\Driver\AnnotationReader:
+        class: 'PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
+        arguments:
+          - '@Doctrine\Common\Annotations\AnnotationReader'
 
     Metadata\MetadataFactory:
         class: 'Metadata\MetadataFactory'

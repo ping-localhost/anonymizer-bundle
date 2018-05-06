@@ -14,7 +14,7 @@ use Metadata\PropertyMetadata;
 class AnonymizedPropertyMetadata extends PropertyMetadata
 {
     /**
-     * @var Generator
+     * @var Generator|UniqueGenerator
      */
     private $generator;
 
@@ -32,6 +32,11 @@ class AnonymizedPropertyMetadata extends PropertyMetadata
      * @var array
      */
     private $excluded = [];
+
+    public function __construct(string $class, string $name)
+    {
+        parent::__construct($class, $name);
+    }
 
     public function setValue($object, $value = null): void
     {

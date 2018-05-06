@@ -33,13 +33,8 @@ class AnonymizeProcessor
             throw new \RuntimeException(sprintf("Couldn't load the metadata for class %s,", \get_class($entity)));
         }
 
-        $property_metadata = array_filter($metadata->propertyMetadata, function ($metadata) {
-            return $metadata instanceof AnonymizedPropertyMetadata;
-        });
-
-        $method_metadata = array_filter($metadata->methodMetadata, function ($metadata) {
-            return $metadata instanceof AnonymizedMethodMetadata;
-        });
+        $property_metadata = $this->getPropertyMetadata($metadata);
+        $method_metadata   = $this->getMethodMetadata($metadata);
 
         if (count($method_metadata) <= 0 && count($property_metadata) <= 0) {
             return;
@@ -48,14 +43,36 @@ class AnonymizeProcessor
         if ($metadata->isCouldExclude() && !$metadata->shouldInclude($entity)) {
             return;
         }
-        /** @var AnonymizedPropertyMetaData $property */
+
         foreach ($property_metadata as $property) {
             $property->setValue($entity);
         }
-
-        /** @var AnonymizedMethodMetadata $method */
         foreach ($method_metadata as $method) {
             $method->invoke($entity);
         }
+    }
+
+    /**
+     * @param AnonymizedClassMetadata $metadata
+     *
+     * @return AnonymizedPropertyMetadata[]
+     */
+    private function getPropertyMetadata(AnonymizedClassMetadata $metadata): array
+    {
+        return array_filter($metadata->propertyMetadata, function ($metadata) {
+            return $metadata instanceof AnonymizedPropertyMetadata;
+        });
+    }
+
+    /**
+     * @param AnonymizedClassMetadata $metadata
+     *
+     * @return AnonymizedMethodMetadata[]
+     */
+    private function getMethodMetadata(AnonymizedClassMetadata $metadata): array
+    {
+        return array_filter($metadata->methodMetadata, function ($metadata) {
+            return $metadata instanceof AnonymizedMethodMetadata;
+        });
     }
 }

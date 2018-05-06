@@ -6,7 +6,6 @@ declare(strict_types=1);
 
 namespace PingLocalhost\AnonymizerBundle\Driver;
 
-use Doctrine\Common\Annotations\Reader;
 use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\Base;
@@ -17,7 +16,6 @@ use Metadata\Driver\DriverInterface;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidAnonymizeAnnotationException;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidFunctionException;
 use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
-use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeEntity;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedClassMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedMethodMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedPropertyMetadata;
@@ -25,18 +23,18 @@ use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedPropertyMetadata;
 class AnonymizeDriver implements DriverInterface
 {
     /**
-     * @var Reader
+     * @var AnnotationReader
      */
-    private $reader;
+    private $extractor;
 
     /**
      * @var Generator
      */
     private $generator;
 
-    public function __construct(Reader $reader, string $locale = 'nl_NL')
+    public function __construct(AnnotationReader $extractor, string $locale = 'nl_NL')
     {
-        $this->reader    = $reader;
+        $this->extractor = $extractor;
         $this->generator = Factory::create($locale);
     }
 
@@ -53,10 +51,7 @@ class AnonymizeDriver implements DriverInterface
 
     private function buildClassMetadata(\ReflectionClass $class, AnonymizedClassMetadata $class_metadata): void
     {
-        /** @var AnonymizeEntity $annotation */
-        $annotation = $this->reader->getClassAnnotation($class, AnonymizeEntity::class);
-
-        if ($annotation === null) {
+        if (null === ($annotation = $this->extractor->getClassAnnotation($class))) {
             return;
         }
 
@@ -75,24 +70,25 @@ class AnonymizeDriver implements DriverInterface
                 );
             }
         }
+
+        $class_metadata->setCouldExclude(true);
+
+
         if (count($annotation->getInclusions()) > 0) {
             $class_metadata->setMatchers($annotation->getInclusions());
             $class_metadata->setMethod(AnonymizedClassMetadata::INCLUDE);
-        } else {
-            $class_metadata->setMatchers($annotation->getExclusions());
-            $class_metadata->setMethod(AnonymizedClassMetadata::EXCLUDE);
+
+            return;
         }
 
-        $class_metadata->setCouldExclude(true);
+        $class_metadata->setMatchers($annotation->getExclusions());
+        $class_metadata->setMethod(AnonymizedClassMetadata::EXCLUDE);
     }
 
     private function buildPropertyMetadata(\ReflectionClass $class, ClassMetadata $class_metadata): void
     {
         foreach ($class->getProperties() as $property) {
-            $property_metadata = new AnonymizedPropertyMetaData($class->getName(), $property->getName());
-
-            /** @var Anonymize $annotation */
-            if (null === ($annotation = $this->reader->getPropertyAnnotation($property, Anonymize::class))) {
+            if (null === ($annotation = $this->extractor->getPropertyAnnotation($property))) {
                 continue;
             }
 
@@ -103,6 +99,7 @@ class AnonymizeDriver implements DriverInterface
                 $factory = $factory->unique();
             }
 
+            $property_metadata = new AnonymizedPropertyMetaData($class->getName(), $property->getName());
             $property_metadata->setGenerator($factory);
             $property_metadata->setArguments($annotation->getArguments());
             $property_metadata->setProperty($annotation->getFaker());
@@ -126,10 +123,7 @@ class AnonymizeDriver implements DriverInterface
     private function buildMethodMetadata(\ReflectionClass $class, ClassMetadata $class_metadata): void
     {
         foreach ($class->getMethods() as $method) {
-            $metadata = new AnonymizedMethodMetadata($class->getName(), $method->getName());
-
-            /** @var AnonymizedMethodMetadata $annotation */
-            if (null === ($annotation = $this->reader->getMethodAnnotation($method, Anonymize::class))) {
+            if (null === $this->extractor->getMethodAnnotation($method)) {
                 continue;
             }
 
@@ -139,7 +133,6 @@ class AnonymizeDriver implements DriverInterface
 
             foreach ($method->getParameters() as $parameter) {
                 if (null === ($type = $parameter->getType())) {
-                    $arguments = $this->lookupParameter($parameter, $annotation, $method, $arguments);
                     continue;
                 }
 
@@ -163,29 +156,15 @@ class AnonymizeDriver implements DriverInterface
                     continue;
                 }
 
-                $arguments = $this->lookupParameter($parameter, $annotation, $method, $arguments);
+                throw new InvalidArgumentException(
+                    sprintf('Didn\'t know how to inject class "%s" for method "%s".', $type, $method->name)
+                );
             }
 
+            $metadata = new AnonymizedMethodMetadata($class->getName(), $method->getName());
             $metadata->setArguments($arguments);
 
             $class_metadata->addMethodMetadata($metadata);
         }
-    }
-
-    private function lookupParameter(
-        \ReflectionParameter $parameter,
-        AnonymizedMethodMetadata $annotation,
-        \ReflectionMethod $method,
-        array $arguments
-    ): array {
-        if (array_key_exists($parameter->name, $annotation->getArguments())) {
-            throw new InvalidArgumentException(
-                sprintf('Didn\'t know how to inject class %s for argument %s', $parameter->name, $method->name)
-            );
-        }
-
-        $arguments[$parameter->name] = $annotation->getArguments()[$parameter->name];
-
-        return $arguments;
     }
 }

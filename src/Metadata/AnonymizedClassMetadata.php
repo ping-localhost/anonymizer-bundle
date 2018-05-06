@@ -16,13 +16,17 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
     public const EXCLUDE = 1;
 
     private $matchers = [];
-
     private $method = self::INCLUDE;
 
     /**
      * @var bool Property to define whether this annotation could be excluded.
      */
     private $could_exclude = false;
+
+    public function __construct(string $name)
+    {
+        parent::__construct($name);
+    }
 
     public function getMethod(): int
     {

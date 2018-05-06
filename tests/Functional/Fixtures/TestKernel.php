@@ -35,7 +35,7 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        $loader->load(__DIR__ . '/config/config.yml');
     }
 
     /**
@@ -43,7 +43,7 @@ class TestKernel extends Kernel
      */
     public function getCacheDir()
     {
-        return \dirname(__DIR__).'/var/cache';
+        return \dirname(__DIR__) . '/var/cache';
     }
 
     /**
@@ -51,6 +51,6 @@ class TestKernel extends Kernel
      */
     public function getLogDir()
     {
-        return \dirname(__DIR__).'/var/logs';
+        return \dirname(__DIR__) . '/var/logs';
     }
 }
