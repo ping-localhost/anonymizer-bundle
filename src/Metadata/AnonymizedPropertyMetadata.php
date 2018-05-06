@@ -84,7 +84,7 @@ class AnonymizedPropertyMetadata extends PropertyMetadata
 
     private function shouldBeExcluded($value): bool
     {
-        if (!is_scalar($value) && !\is_object($value) && !method_exists($value, '__toString')) {
+        if (!is_scalar($this) && \is_object($value) && !method_exists($value, '__toString')) {
             return false;
         }
 

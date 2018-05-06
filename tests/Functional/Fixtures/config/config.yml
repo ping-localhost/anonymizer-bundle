@@ -1,0 +1,9 @@
+framework:
+    secret: test
+
+services:
+    PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor:
+        class: 'PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor'
+        arguments:
+          - '@Metadata\MetadataFactory'
+        public: true

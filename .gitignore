@@ -6,3 +6,4 @@
 /.phar/
 /vendor/
 /var/
+/tests/Functional/var/
