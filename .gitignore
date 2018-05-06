@@ -1,0 +1,8 @@
+/.phpcs-cache
+/composer.lock
+/coverage.xml
+/phpunit.xml
+/.idea/
+/.phar/
+/vendor/
+/var/

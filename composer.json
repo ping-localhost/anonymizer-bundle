@@ -1,0 +1,60 @@
+{
+    "name": "ping-localhost/anonymizer-bundle",
+    "description": "An annotation-based bundle to anonymize sensitive data per entity",
+    "type": "symfony-bundle",
+    "keywords": [
+        "anonymize",
+        "anonymizer",
+        "annotation",
+        "doctrine"
+    ],
+    "homepage": "https://github.com/ping-localhost/anonymizer-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mitchell",
+            "email": "37925797+ping-localhost@users.noreply.github.com",
+            "homepage": "https://github.com/ping-localhost"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/ping-localhost/anonymizer-bundle",
+        "wiki": "https://github.com/ping-localhost/anonymizer-bundle/wiki",
+        "issues": "https://github.com/ping-localhost/anonymizer-bundle/issues"
+    },
+    "require": {
+        "php": "^7.1.0",
+        "symfony/framework-bundle": "~3.4|~4.0",
+        "symfony/console": "~3.4|~4.0",
+        "symfony/dependency-injection": "~3.4|~4.0",
+        "doctrine/annotations": "^1.4",
+        "jms/metadata": "^1.6",
+        "fzaninotto/faker": "^1.7",
+        "doctrine/orm": "^2.5"
+    },
+    "require-dev": {
+        "hostnet/phpcs-tool": "^8.0.0",
+        "nyholm/symfony-bundle-test": "^1.2",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "PingLocalhost\\AnonymizerBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PingLocalhost\\AnonymizerBundle\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "archive": {
+        "exclude": [
+            "/tests"
+        ]
+    }
+}
