@@ -138,7 +138,7 @@ class AnonymizedPropertyMetadataTest extends TestCase
         self::assertSame($generator, $this->getValue($this->metadata, 'generator'));
     }
 
-    public function getValue($object, string $property_name)
+    private function getValue($object, string $property_name)
     {
         $property = new \ReflectionProperty($object, $property_name);
         $property->setAccessible(true);

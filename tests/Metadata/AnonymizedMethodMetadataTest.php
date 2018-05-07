@@ -21,31 +21,31 @@ class AnonymizedMethodMetadataTest extends TestCase
     /**
      * @var AnonymizedMethodMetadata
      */
-    private $anonymized_method_metadata;
+    private $metadata;
 
     protected function setUp(): void
     {
         $this->class = ExampleObject::class;
         $this->name = 'anonymize';
 
-        $this->anonymized_method_metadata = new AnonymizedMethodMetadata($this->class, $this->name);
+        $this->metadata = new AnonymizedMethodMetadata($this->class, $this->name);
     }
 
     public function testGetArguments(): void
     {
-        self::assertEmpty($this->anonymized_method_metadata->getArguments());
+        self::assertEmpty($this->metadata->getArguments());
     }
 
     public function testSetArguments(): void
     {
-        $this->anonymized_method_metadata->setArguments(['argument']);
-        self::assertSame(['argument'], $this->anonymized_method_metadata->getArguments());
+        $this->metadata->setArguments(['argument']);
+        self::assertSame(['argument'], $this->metadata->getArguments());
     }
 
     public function testInvoke(): void
     {
-        $this->anonymized_method_metadata->setArguments(['generator' => Factory::create()]);
+        $this->metadata->setArguments(['generator' => Factory::create()]);
 
-        $this->anonymized_method_metadata->invoke(new ExampleObject('username', 'email@email.com'));
+        $this->metadata->invoke(new ExampleObject('username', 'email@email.com'));
     }
 }

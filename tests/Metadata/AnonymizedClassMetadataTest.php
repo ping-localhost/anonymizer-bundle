@@ -19,44 +19,52 @@ class AnonymizedClassMetadataTest extends TestCase
     /**
      * @var AnonymizedClassMetadata
      */
-    private $anonymized_class_metadata;
+    private $metadata;
 
     protected function setUp(): void
     {
         $this->name = ExampleObject::class;
 
-        $this->anonymized_class_metadata = new AnonymizedClassMetadata($this->name);
+        $this->metadata = new AnonymizedClassMetadata($this->name);
     }
 
-    public function testGetMethod(): void
+    public function testGeneric(): void
     {
+        $this->metadata->setMethod(AnonymizedClassMetadata::INCLUDE);
+        self::assertSame(AnonymizedClassMetadata::INCLUDE, $this->getValue($this->metadata, 'method'));
+
+        self::assertEmpty($this->metadata->getMatchers());
+        $this->metadata->setMatchers(['matchers']);
+        self::assertSame(['matchers'], $this->metadata->getMatchers());
+
+        self::assertFalse($this->metadata->isCouldExclude());
+        $this->metadata->setCouldExclude(true);
+        self::assertTrue($this->metadata->isCouldExclude());
     }
 
-    public function testSetMethod(): void
+    public function testSetMethodInvalid(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The method 9999 is not a valid method');
+
+        $this->metadata->setMethod(9999);
     }
 
     public function testShouldInclude(): void
     {
     }
 
-    public function testGetMatchers(): void
-    {
-    }
-
-    public function testSetMatchers(): void
-    {
-    }
-
-    public function testIsCouldExclude(): void
-    {
-    }
-
-    public function testSetCouldExclude(): void
-    {
-    }
-
     public function testMerge(): void
     {
+    }
+
+    private function getValue($object, string $property_name)
+    {
+        $property = new \ReflectionProperty($object, $property_name);
+        $property->setAccessible(true);
+        $value = $property->getValue($object);
+        $property->setAccessible(false);
+
+        return $value;
     }
 }

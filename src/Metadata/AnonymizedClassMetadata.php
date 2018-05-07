@@ -8,7 +8,6 @@ namespace PingLocalhost\AnonymizerBundle\Metadata;
 
 use Metadata\MergeableClassMetadata;
 use Metadata\MergeableInterface;
-use Psr\Log\InvalidArgumentException;
 
 class AnonymizedClassMetadata extends MergeableClassMetadata
 {
@@ -66,7 +65,7 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
     public function setMethod(int $method): void
     {
         if (!\in_array($method, [self::INCLUDE, self::EXCLUDE], true)) {
-            throw new InvalidArgumentException(sprintf('The method %d is not a valid method', $method));
+            throw new \InvalidArgumentException(sprintf('The method %d is not a valid method', $method));
         }
 
         $this->method = $method;

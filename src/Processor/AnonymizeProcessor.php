@@ -47,6 +47,7 @@ class AnonymizeProcessor
         foreach ($property_metadata as $property) {
             $property->setValue($object);
         }
+
         foreach ($method_metadata as $method) {
             $method->invoke($object);
         }
