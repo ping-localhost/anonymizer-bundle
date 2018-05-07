@@ -2,18 +2,10 @@
 <a href="https://github.com/ping-localhost"><img width="200" src="https://i.imgur.com/cYZ0hos.png"></a>
 </p>
 
-**Package details** 
-
-[![Latest Release Version](https://img.shields.io/github/release/ping-localhost/anonymizer-bundle.svg?style=flat-square)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
-[![License](https://img.shields.io/github/license/ping-localhost/anonymizer-bundle.svg?style=flat-square)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
-[![Maintenance](https://img.shields.io/maintenance/yes/2018.svg?style=flat-square)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
-[![Total Downloads](https://img.shields.io/packagist/dt/ping-localhost/anonymizer-bundle.svg?style=flat-square)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
-
-**Code quality**
-
+[![Latest Stable Version](https://poser.pugx.org/ping-localhost/anonymizer-bundle/v/stable.png)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
 [![Build Status](https://travis-ci.com/ping-localhost/anonymizer-bundle.svg?branch=master)](https://travis-ci.com/ping-localhost/anonymizer-bundle)
-[![Code coverage](https://codecov.io/gh/ping-localhost/anonymizer-bundle/branch/master/graph/badge.svg)](https://codecov.io/gh/ping-localhost/anonymizer-bundle)
-[![Dependency Status](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b/badge.svg)](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b)
+[![Dependency Status](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5aef06f90fb24f5450e02e9b)
+[![Code coverage](https://codecov.io/gh/ping-localhost/anonymizer-bundle/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ping-localhost/anonymizer-bundle)
 
 # Credit
 This bundle is a stripped down version of the [OrangeRT/AnonymizeBundle](https://github.com/OrangeRT/AnonymizeBundle) package created by OrangeRT, so I'm hereby giving credit where credit is due.
