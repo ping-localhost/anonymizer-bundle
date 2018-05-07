@@ -9,19 +9,19 @@ namespace PingLocalhost\AnonymizerBundle\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \PingLocalhost\AnonymizerBundle\Exception\InvalidFunctionException
+ * @covers \PingLocalhost\AnonymizerBundle\Exception\InvalidFakerException
  */
 class InvalidFunctionExceptionTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $function = 'Function';
-        $location = 'Location';
-        $previous = new \InvalidArgumentException('Invalid!');
+        $generator = 'Generator';
+        $property  = 'Property';
+        $previous  = new \InvalidArgumentException('Invalid!');
 
         self::assertSame(
-            sprintf('Invalid function at %s, the function [%s] doesn\'t exist in the generator', $location, $function),
-            (new InvalidFunctionException($function, $location, $previous))->getMessage()
+            'Invalid generator "Generator" specified at: "Property".',
+            (new InvalidFakerException($generator, $property, $previous))->getMessage()
         );
     }
 }

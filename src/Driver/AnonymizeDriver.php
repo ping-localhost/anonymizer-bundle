@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidAnonymizeAnnotationException;
-use PingLocalhost\AnonymizerBundle\Exception\InvalidFunctionException;
+use PingLocalhost\AnonymizerBundle\Exception\InvalidFakerException;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedClassMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedMethodMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedPropertyMetadata;
@@ -107,12 +107,12 @@ class AnonymizeDriver implements DriverInterface
         }
     }
 
-    private function createFactory(string $function, string $name): Generator
+    private function createFactory(string $generator, string $property): Generator
     {
         try {
-            $this->generator->getFormatter($function);
-        } catch (\InvalidArgumentException $e) {
-            throw new InvalidFunctionException($function, $name, $e);
+            $this->generator->getFormatter($generator);
+        } catch (\InvalidArgumentException $exception) {
+            throw new InvalidFakerException($generator, $property, $exception);
         }
 
         return $this->generator;

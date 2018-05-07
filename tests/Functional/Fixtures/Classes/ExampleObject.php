@@ -18,7 +18,7 @@ class ExampleObject
     /**
      * @var string
      *
-     * @Anonymize(faker="userName", exclude="root")
+     * @Anonymize(faker="userName", exclude="root", unique=true)
      */
     private $username;
 

@@ -2,6 +2,13 @@ framework:
     secret: test
 
 services:
+    PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver:
+        class: 'PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver'
+        arguments:
+            - '@PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
+            - '%ping_localhost.anonymizer_bundle.default_locale%'
+        public: true
+
     PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor:
         class: 'PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor'
         arguments:
