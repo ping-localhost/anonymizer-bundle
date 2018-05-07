@@ -32,13 +32,13 @@ class AnonymizeDriver implements DriverInterface
      */
     private $generator;
 
-    public function __construct(AnnotationReader $extractor, string $locale = 'nl_NL')
+    public function __construct(AnnotationReader $extractor, string $locale)
     {
         $this->extractor = $extractor;
         $this->generator = Factory::create($locale);
     }
 
-    public function loadMetadataForClass(\ReflectionClass $class): ClassMetadata
+    public function loadMetadataForClass(\ReflectionClass $class): AnonymizedClassMetadata
     {
         $class_metadata = new AnonymizedClassMetadata($class->getName());
 

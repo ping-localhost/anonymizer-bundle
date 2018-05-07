@@ -8,4 +8,8 @@ namespace PingLocalhost\AnonymizerBundle\Exception;
 
 class InvalidAnonymizeAnnotationException extends \Exception
 {
+    public function __construct(string $message)
+    {
+        parent::__construct($message);
+    }
 }

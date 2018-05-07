@@ -59,7 +59,7 @@ class AnonymizeProcessor
      */
     private function getPropertyMetadata(AnonymizedClassMetadata $metadata): array
     {
-        return array_filter($metadata->propertyMetadata, function ($metadata) {
+        return array_filter($metadata->getPropertyMetadata(), function ($metadata) {
             return $metadata instanceof AnonymizedPropertyMetadata;
         });
     }
@@ -71,7 +71,7 @@ class AnonymizeProcessor
      */
     private function getMethodMetadata(AnonymizedClassMetadata $metadata): array
     {
-        return array_filter($metadata->methodMetadata, function ($metadata) {
+        return array_filter($metadata->getMethodMetadata(), function ($metadata) {
             return $metadata instanceof AnonymizedMethodMetadata;
         });
     }

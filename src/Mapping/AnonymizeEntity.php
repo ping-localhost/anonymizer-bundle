@@ -30,7 +30,7 @@ class AnonymizeEntity
      */
     private $inclusions;
 
-    public function __construct($options)
+    public function __construct(array $options)
     {
         $this->exclusions = $options['exclusions'] ?? [];
         $this->inclusions = $options['inclusions'] ?? [];

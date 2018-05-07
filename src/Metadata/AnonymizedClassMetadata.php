@@ -28,20 +28,6 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
         parent::__construct($name);
     }
 
-    public function getMethod(): int
-    {
-        return $this->method;
-    }
-
-    public function setMethod(int $method): void
-    {
-        if (!\in_array($method, [self::INCLUDE, self::EXCLUDE], true)) {
-            throw new InvalidArgumentException(sprintf('The method %d is not a valid method', $method));
-        }
-
-        $this->method = $method;
-    }
-
     /**
      * @param object $object
      *
@@ -68,6 +54,33 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
         return $this->method === self::EXCLUDE;
     }
 
+    public function merge(MergeableInterface $object): void
+    {
+        parent::merge($object);
+
+        if (!($object instanceof self)) {
+            return;
+        }
+
+        $this->could_exclude = $object->could_exclude || $this->could_exclude;
+        $this->matchers      = $object->matchers ?? $this->matchers;
+        $this->method        = $object->method ?? $this->method;
+    }
+
+    public function setMethod(int $method): void
+    {
+        if (!\in_array($method, [self::INCLUDE, self::EXCLUDE], true)) {
+            throw new InvalidArgumentException(sprintf('The method %d is not a valid method', $method));
+        }
+
+        $this->method = $method;
+    }
+
+    public function getMethod(): int
+    {
+        return $this->method;
+    }
+
     public function getMatchers(): array
     {
         return $this->matchers;
@@ -88,16 +101,23 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
         $this->could_exclude = $could_exclude;
     }
 
-    public function merge(MergeableInterface $object): void
+    public function getMethodMetadata(): array
     {
-        parent::merge($object);
+        return $this->methodMetadata;
+    }
 
-        if (!($object instanceof self)) {
-            return;
-        }
+    public function getPropertyMetadata(): array
+    {
+        return $this->propertyMetadata;
+    }
 
-        $this->could_exclude = $object->could_exclude || $this->could_exclude;
-        $this->matchers      = $object->matchers ?? $this->matchers;
-        $this->method        = $object->method ?? $this->method;
+    public function getFileResources(): array
+    {
+        return $this->fileResources;
+    }
+
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
     }
 }

@@ -33,9 +33,9 @@ class AnnotationReader
         return null;
     }
 
-    public function getPropertyAnnotation(\ReflectionProperty $property): ?Anonymize
+    public function getMethodAnnotation(\ReflectionMethod $method): ?Anonymize
     {
-        foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
+        foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
             if ($annotation instanceof Anonymize) {
                 return $annotation;
             }
@@ -44,9 +44,9 @@ class AnnotationReader
         return null;
     }
 
-    public function getMethodAnnotation(\ReflectionMethod $method): ?Anonymize
+    public function getPropertyAnnotation(\ReflectionProperty $property): ?Anonymize
     {
-        foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
+        foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
             if ($annotation instanceof Anonymize) {
                 return $annotation;
             }
