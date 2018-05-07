@@ -18,7 +18,7 @@
 # Credit
 This bundle is a stripped down version of the [OrangeRT/AnonymizeBundle](https://github.com/OrangeRT/AnonymizeBundle) package created by OrangeRT, so I'm hereby giving credit where credit is due.
 
-I've forked their project and stripped it, so that I could use it to anonymize data per entity, instead of the whole database.
+I've forked their project and stripped it, so that I could use it to anonymize data per class, instead of the whole database.
 
 # Contents
 - [Installation](#installation)
@@ -27,7 +27,7 @@ I've forked their project and stripped it, so that I could use it to anonymize d
   * [Anonymizing a property](#anonymizing-a-property)
   * [Anonymizing callback](#anonymizing-callback)
   * [Unique variables](#unique-variables)
-  * [Excluding entities](#excluding-entities)
+  * [Excluding classes](#excluding-classes)
     + [Skipping objects](#skipping-objects)
 - [Faker](#faker)
   * [Providers](#providers)
@@ -65,8 +65,8 @@ class AppKernel extends Kernel
 ```
 
 # Usage
-Doctrine managed entities can be anonymized by annotating the properties that you want to be anonymized. 
-There are two annotations available, `@Anonymize` and `@AnonymizeEntity`.
+Classes can be anonymized by annotating the properties that you want to be anonymized.
+There are two annotations available, `@Anonymize` and `@AnonymizeClass`.
 
 ## Anonymizing a property
 Properties can be anonymized with the `@Anonymize` annotation:
@@ -76,9 +76,6 @@ Properties can be anonymized with the `@Anonymize` annotation:
 
 use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
 
-/**
- * A doctrine managed entity
- */
 class Person
 {
     /**
@@ -88,12 +85,12 @@ class Person
 }
 ```
 
-Once you have tagged an Entity with the `@Anonymize`-annotation, its possible to anonymize that entity 
+Once you have tagged a class with the `@Anonymize`-annotation, its possible to anonymize that class
 by passing it to the `anonymize`-function within the `AnonymizeProcessor`-class.
 
 ## Anonymizing callback
-Sometimes it is required that properties need an advanced or a custom way of anonymizing said entity. 
-If a method is annotated with the `@Anonymize` annotation, the method is called. 
+Sometimes it is required that properties need an advanced or a custom way of anonymizing said class.
+If a method is annotated with the `@Anonymize` annotation, the method is called.
 
 If you need a faker you can typehint the parameter, as soon below:
 ```php
@@ -105,9 +102,9 @@ class Person
 {
     private $username;
     private $email;
-    
+
     /**
-     * @Anonymize() 
+     * @Anonymize()
      */
     public function anonymize(\Faker\UniqueGenerator $generator)
     {
@@ -116,15 +113,15 @@ class Person
 }
 ```
 
-Upon anonymizing the person, a UniqueGenerator is created for the method and the method is invoked with the generator. 
+Upon anonymizing the person, a UniqueGenerator is created for the method and the method is invoked with the generator.
 The username will be the same as the email, and it will be a uniquely generated email.
 
 ## Unique variables
-For properties like email and usernames, unique values should be used. The Anonymize property has a `unique=true` 
-flag to set use the `UniqueGenerator` provided by the Faker library. If a callback needs the UniqueGenerator, 
+For properties like email and usernames, unique values should be used. The Anonymize property has a `unique=true`
+flag to set use the `UniqueGenerator` provided by the Faker library. If a callback needs the UniqueGenerator,
 typehint the generator with the UniqueGenerator.
 
-## Excluding entities
+## Excluding objects
 It is possible to either skip a property, or to skip an entire object.
 
 ### Skipping objects
@@ -138,12 +135,12 @@ that have a username that ends with `@example.com`.
 ```php
 <?php
 
-use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeEntity;
+use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeClass;
 use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
 
 /**
- * 
- * @AnonymizeEntity(exclusions={"username": "/@example.com$/"})
+ *
+ * @AnonymizeClass(exclusions={"username": "/@example.com$/"})
  */
 class Person
 {

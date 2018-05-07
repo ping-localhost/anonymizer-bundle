@@ -4,16 +4,16 @@
  */
 declare(strict_types=1);
 
-namespace PingLocalhost\AnonymizerBundle\Functional\Fixtures\Entity;
+namespace PingLocalhost\AnonymizerBundle\Functional\Fixtures\Classes;
 
 use Faker\Generator;
 use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
-use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeEntity;
+use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeClass;
 
 /**
- * @AnonymizeEntity(exclusions={"email": "/@example.com$/"})
+ * @AnonymizeClass(exclusions={"email": "/@example.com$/"})
  */
-class Entity
+class ExampleObject
 {
     /**
      * @var string

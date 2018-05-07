@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace PingLocalhost\AnonymizerBundle\Driver;
 
 use PHPUnit\Framework\TestCase;
-use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Entity\Entity;
+use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Classes\ExampleObject;
 
 /**
  * @covers \PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver

@@ -8,7 +8,7 @@ namespace PingLocalhost\AnonymizerBundle\Driver;
 
 use Doctrine\Common\Annotations\Reader;
 use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
-use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeEntity;
+use PingLocalhost\AnonymizerBundle\Mapping\AnonymizeClass;
 
 class AnnotationReader
 {
@@ -22,10 +22,10 @@ class AnnotationReader
         $this->reader = $reader;
     }
 
-    public function getClassAnnotation(\ReflectionClass $class): ?AnonymizeEntity
+    public function getClassAnnotation(\ReflectionClass $class): ?AnonymizeClass
     {
         foreach ($this->reader->getClassAnnotations($class) as $annotation) {
-            if ($annotation instanceof AnonymizeEntity) {
+            if ($annotation instanceof AnonymizeClass) {
                 return $annotation;
             }
         }

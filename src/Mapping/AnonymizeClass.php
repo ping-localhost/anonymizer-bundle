@@ -14,17 +14,17 @@ use PingLocalhost\AnonymizerBundle\Exception\InvalidAnonymizeAnnotationException
  * @Annotation
  * @Target(value="CLASS")
  */
-class AnonymizeEntity
+class AnonymizeClass
 {
     /**
-     * The entities to exclude. "property" => "value". If any of the property matches, do not update this entity.
+     * The entities to exclude. "property" => "value". If any of the property matches, do not update this class.
      *
      * @var array
      */
     private $exclusions;
 
     /**
-     * The entities to include. "property" => "value". If any of the property matches the value, update this entity.
+     * The entities to include. "property" => "value". If any of the property matches the value, update this class.
      *
      * @var array
      */

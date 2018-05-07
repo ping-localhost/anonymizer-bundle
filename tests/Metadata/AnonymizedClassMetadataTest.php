@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace PingLocalhost\AnonymizerBundle\Metadata;
 
 use PHPUnit\Framework\TestCase;
-use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Entity\Entity;
+use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Classes\ExampleObject;
 
 /**
  * @covers \PingLocalhost\AnonymizerBundle\Metadata\AnonymizedClassMetadata
@@ -23,7 +23,7 @@ class AnonymizedClassMetadataTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->name = Entity::class;
+        $this->name = ExampleObject::class;
 
         $this->anonymized_class_metadata = new AnonymizedClassMetadata($this->name);
     }

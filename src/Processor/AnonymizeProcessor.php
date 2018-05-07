@@ -24,13 +24,13 @@ class AnonymizeProcessor
     }
 
     /**
-     * @param object $entity
+     * @param object $object
      */
-    public function anonymize($entity): void
+    public function anonymize($object): void
     {
         /** @var AnonymizedClassMetadata $metadata */
-        if (null === ($metadata = $this->metadata_factory->getMetadataForClass(\get_class($entity)))) {
-            throw new \RuntimeException(sprintf("Couldn't load the metadata for class %s,", \get_class($entity)));
+        if (null === ($metadata = $this->metadata_factory->getMetadataForClass(\get_class($object)))) {
+            throw new \RuntimeException(sprintf("Couldn't load the metadata for class %s,", \get_class($object)));
         }
 
         $property_metadata = $this->getPropertyMetadata($metadata);
@@ -40,15 +40,15 @@ class AnonymizeProcessor
             return;
         }
 
-        if ($metadata->isCouldExclude() && !$metadata->shouldInclude($entity)) {
+        if ($metadata->isCouldExclude() && !$metadata->shouldInclude($object)) {
             return;
         }
 
         foreach ($property_metadata as $property) {
-            $property->setValue($entity);
+            $property->setValue($object);
         }
         foreach ($method_metadata as $method) {
-            $method->invoke($entity);
+            $method->invoke($object);
         }
     }
 
