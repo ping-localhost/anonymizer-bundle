@@ -34,7 +34,7 @@ class Anonymize
      * An array of regular expressions.
      * Excludes the current property of the class if one of the regular expressions matches.
      *
-     * @var string[]
+     * @var array|string[]
      */
     private $excluded;
 

@@ -26,12 +26,17 @@ class AnonymizeProcessorTest extends KernelTestCase
 
     public function testAnonymizer(): void
     {
-        $unchanged_object = new ExampleObject('PHPUnit', 'email@example.com');
-        $changed_object   = new ExampleObject('PHPUnit', 'email@not-example.com');
+        $unchanged_property = new ExampleObject('root', 'email@example.com');
+        $unchanged_class    = new ExampleObject('PHPUnit', 'email@example.com');
+        $changed_object     = new ExampleObject('PHPUnit', 'email@not-example.com');
 
-        $this->anonymizer->anonymize($unchanged_object);
-        self::assertEquals('PHPUnit', $unchanged_object->getUsername());
-        self::assertEquals('email@example.com', $unchanged_object->getEmail());
+        $this->anonymizer->anonymize($unchanged_property);
+        self::assertEquals('root', $unchanged_property->getUsername());
+        self::assertEquals('email@example.com', $unchanged_property->getEmail());
+
+        $this->anonymizer->anonymize($unchanged_class);
+        self::assertEquals('PHPUnit', $unchanged_class->getUsername());
+        self::assertEquals('email@example.com', $unchanged_class->getEmail());
 
         $this->anonymizer->anonymize($changed_object);
         self::assertNotEquals('PHPUnit', $changed_object->getUsername());

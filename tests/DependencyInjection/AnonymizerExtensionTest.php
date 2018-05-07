@@ -7,6 +7,8 @@ declare(strict_types=1);
 namespace PingLocalhost\AnonymizerBundle\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
+use PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @covers \PingLocalhost\AnonymizerBundle\DependencyInjection\AnonymizerExtension
@@ -16,14 +18,21 @@ class AnonymizerExtensionTest extends TestCase
     /**
      * @var AnonymizerExtension
      */
-    private $anonymizer_extension;
+    private $extension;
 
     protected function setUp(): void
     {
-        $this->anonymizer_extension = new AnonymizerExtension();
+        $this->extension = new AnonymizerExtension();
     }
 
     public function testLoad(): void
     {
+        $container_builder = new ContainerBuilder();
+        $this->extension->load([], $container_builder);
+
+        self::assertNotNull($container_builder->get(
+            AnonymizeProcessor::class,
+            ContainerBuilder::NULL_ON_INVALID_REFERENCE
+        ));
     }
 }

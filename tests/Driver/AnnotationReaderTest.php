@@ -28,9 +28,7 @@ class AnnotationReaderTest extends TestCase
     {
         $this->reader = $this->prophesize(Reader::class);
 
-        $this->annotation_reader = new AnnotationReader(
-            $this->reader->reveal()
-        );
+        $this->annotation_reader = new AnnotationReader($this->reader->reveal());
     }
 
     /**

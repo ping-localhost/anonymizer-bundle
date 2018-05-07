@@ -8,7 +8,6 @@ namespace PingLocalhost\AnonymizerBundle\Metadata;
 
 use Faker\Generator;
 use Faker\UniqueGenerator;
-use InvalidArgumentException;
 use Metadata\PropertyMetadata;
 
 class AnonymizedPropertyMetadata extends PropertyMetadata
@@ -38,6 +37,21 @@ class AnonymizedPropertyMetadata extends PropertyMetadata
         parent::__construct($class, $name);
     }
 
+    public function setProperty(string $property): void
+    {
+        $this->property = $property;
+    }
+
+    public function setArguments(array $arguments): void
+    {
+        $this->arguments = $arguments;
+    }
+
+    public function setExcluded(array $excluded): void
+    {
+        $this->excluded = $excluded;
+    }
+
     public function setValue($object, $value = null): void
     {
         if ($value === null) {
@@ -45,8 +59,16 @@ class AnonymizedPropertyMetadata extends PropertyMetadata
                 return;
             }
 
-            if (true === $this->shouldBeExcluded($object)) {
+            if (true === $this->shouldBeExcluded($this->getValue($object))) {
                 return;
+            }
+
+            if (null === $this->generator) {
+                throw new \InvalidArgumentException('No generator has been set and no value has been passed.');
+            }
+
+            if (null === $this->property) {
+                throw new \InvalidArgumentException('No property has been set and no value has been passed.');
             }
 
             $value = \is_callable([$this->generator, $this->property])
@@ -60,31 +82,13 @@ class AnonymizedPropertyMetadata extends PropertyMetadata
     public function setGenerator($generator): void
     {
         if (!($generator instanceof Generator) && !($generator instanceof UniqueGenerator)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Invalid argument, expected one one \'Faker\\Generator\' or \'Faker\\UniqueGenerator\', got %s',
-                    \get_class($generator)
-                ),
-                2002
-            );
+            throw new \InvalidArgumentException(sprintf(
+                "Invalid argument, expected one one 'Faker\Generator' or 'Faker\UniqueGenerator', got %s",
+                \get_class($generator)
+            ));
         }
 
         $this->generator = $generator;
-    }
-
-    public function setProperty(string $property): void
-    {
-        $this->property = $property;
-    }
-
-    public function setArguments(array $arguments): void
-    {
-        $this->arguments = $arguments;
-    }
-
-    public function setExcluded($excluded): void
-    {
-        $this->excluded = $excluded;
     }
 
     private function shouldBeExcluded($value): bool

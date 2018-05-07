@@ -15,7 +15,6 @@ use Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidAnonymizeAnnotationException;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidFunctionException;
-use PingLocalhost\AnonymizerBundle\Mapping\Anonymize;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedClassMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedMethodMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedPropertyMetadata;
@@ -72,7 +71,6 @@ class AnonymizeDriver implements DriverInterface
         }
 
         $class_metadata->setCouldExclude(true);
-
 
         if (count($annotation->getInclusions()) > 0) {
             $class_metadata->setMatchers($annotation->getInclusions());

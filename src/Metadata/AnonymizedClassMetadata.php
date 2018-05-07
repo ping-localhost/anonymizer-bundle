@@ -15,12 +15,8 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
     public const INCLUDE = 0;
     public const EXCLUDE = 1;
 
-    private $matchers = [];
-    private $method = self::INCLUDE;
-
-    /**
-     * @var bool Property to define whether this annotation could be excluded.
-     */
+    private $matchers      = [];
+    private $method        = self::INCLUDE;
     private $could_exclude = false;
 
     public function __construct(string $name)
@@ -76,11 +72,6 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
         $this->method = $method;
     }
 
-    public function getMethod(): int
-    {
-        return $this->method;
-    }
-
     public function getMatchers(): array
     {
         return $this->matchers;
@@ -109,15 +100,5 @@ class AnonymizedClassMetadata extends MergeableClassMetadata
     public function getPropertyMetadata(): array
     {
         return $this->propertyMetadata;
-    }
-
-    public function getFileResources(): array
-    {
-        return $this->fileResources;
-    }
-
-    public function getCreatedAt(): int
-    {
-        return $this->createdAt;
     }
 }
