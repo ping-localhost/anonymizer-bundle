@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace PingLocalhost\AnonymizerBundle\Driver;
 
 use PHPUnit\Framework\TestCase;
+use PingLocalhost\AnonymizerBundle\Faker\Generator;
 use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Classes\ExampleObject;
 
 /**
@@ -15,7 +16,7 @@ use PingLocalhost\AnonymizerBundle\Functional\Fixtures\Classes\ExampleObject;
 class AnonymizeDriverTest extends TestCase
 {
     private $extractor;
-    private $locale;
+    private $generator;
 
     /**
      * @var AnonymizeDriver
@@ -25,9 +26,9 @@ class AnonymizeDriverTest extends TestCase
     protected function setUp(): void
     {
         $this->extractor = $this->prophesize(AnnotationReader::class);
-        $this->locale    = 'nl_NL';
+        $this->generator = $this->prophesize(Generator::class);
 
-        $this->anonymize_driver = new AnonymizeDriver($this->extractor->reveal(), $this->locale);
+        $this->anonymize_driver = new AnonymizeDriver($this->extractor->reveal(), $this->generator->reveal());
     }
 
     public function testLoadMetadataForClass(): void

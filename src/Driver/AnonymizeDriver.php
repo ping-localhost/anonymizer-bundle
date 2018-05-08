@@ -6,8 +6,7 @@ declare(strict_types=1);
 
 namespace PingLocalhost\AnonymizerBundle\Driver;
 
-use Faker\Factory;
-use Faker\Generator;
+use Faker\Generator as BaseGenerator;
 use Faker\Provider\Base;
 use Faker\UniqueGenerator;
 use InvalidArgumentException;
@@ -15,6 +14,7 @@ use Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidAnonymizeAnnotationException;
 use PingLocalhost\AnonymizerBundle\Exception\InvalidFakerException;
+use PingLocalhost\AnonymizerBundle\Faker\Generator;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedClassMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedMethodMetadata;
 use PingLocalhost\AnonymizerBundle\Metadata\AnonymizedPropertyMetadata;
@@ -31,10 +31,10 @@ class AnonymizeDriver implements DriverInterface
      */
     private $generator;
 
-    public function __construct(AnnotationReader $extractor, string $locale)
+    public function __construct(AnnotationReader $extractor, Generator $generator)
     {
         $this->extractor = $extractor;
-        $this->generator = Factory::create($locale);
+        $this->generator = $generator;
     }
 
     public function loadMetadataForClass(\ReflectionClass $class): AnonymizedClassMetadata
@@ -142,7 +142,7 @@ class AnonymizeDriver implements DriverInterface
                     continue;
                 }
 
-                if (is_a($type, Generator::class, true)) {
+                if (is_a($type, BaseGenerator::class, true)) {
                     $factory          = $this->generator;
                     $arguments[$name] = $factory;
                     continue;

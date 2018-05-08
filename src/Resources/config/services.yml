@@ -2,11 +2,17 @@ parameters:
     ping_localhost.anonymizer_bundle.default_locale: 'nl_NL'
 
 services:
+    PingLocalhost\AnonymizerBundle\Faker\Generator:
+        class: 'PingLocalhost\AnonymizerBundle\Faker\Generator'
+        arguments:
+            - '%ping_localhost.anonymizer_bundle.default_locale%'
+            - !tagged 'pinglocalhost.anonymizerbundle.provider'
+
     PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver:
         class: 'PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver'
         arguments:
           - '@PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
-          - '%ping_localhost.anonymizer_bundle.default_locale%'
+          - '@PingLocalhost\AnonymizerBundle\Faker\Generator'
 
     PingLocalhost\AnonymizerBundle\Driver\AnnotationReader:
         class: 'PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'

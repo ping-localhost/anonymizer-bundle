@@ -2,11 +2,21 @@ framework:
     secret: test
 
 services:
+    _instanceof:
+        PingLocalhost\AnonymizerBundle\Faker\ProviderInterface:
+            tags: ['pinglocalhost.anonymizerbundle.provider']
+
+    PingLocalhost\AnonymizerBundle\Faker\Generator:
+        class: 'PingLocalhost\AnonymizerBundle\Faker\Generator'
+        arguments:
+            - '%ping_localhost.anonymizer_bundle.default_locale%'
+            - !tagged 'pinglocalhost.anonymizerbundle.faker'
+
     PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver:
         class: 'PingLocalhost\AnonymizerBundle\Driver\AnonymizeDriver'
         arguments:
-            - '@PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
-            - '%ping_localhost.anonymizer_bundle.default_locale%'
+          - '@PingLocalhost\AnonymizerBundle\Driver\AnnotationReader'
+          - '@PingLocalhost\AnonymizerBundle\Faker\Generator'
         public: true
 
     PingLocalhost\AnonymizerBundle\Processor\AnonymizeProcessor:
