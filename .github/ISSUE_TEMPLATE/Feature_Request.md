@@ -5,7 +5,7 @@ about: You have a neat idea that should be implemented? 🎩
 
 ### Feature Request
 
-<!-- Please fill in the relevant information below to help triaging your issue. -->
+<!-- Fill in the relevant information below to help triage your issue. -->
 
 |    Q        |   A
 |------------ | ------

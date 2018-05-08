@@ -1,21 +1,19 @@
 ---
-name: 🎉 New Feaure
-about: You have implemented some neat idea that you want to make part of Doctrine? 🎩
+name: 🎉 New Feature
+about: You have implemented some neat idea that you want to make part of this bundle? 🎩
 ---
 
-<!-- Thank you for submitting new feature!.
-     In order to ease the process, select correct target branch based on these criteria:
-      * I am submitting a bugfix for a stable release
-        * Your PR should target the lowest active stable branch
-      * I am submitting a new feature
-        * Your PR should target the master branch.
-      * I am submitting a BC-breaking change
-        * Your PR must target the master branch.
+<!--
+Thank you for submitting new feature!
+Pick the target branch based according to these criteria:
+  * submitting a bugfix: target the lowest active stable branch: 2.6
+  * submitting a new feature: target the master branch.
+  * submitting a BC-breaking change: target the master branch
 -->
 
-### Feature Request
+### New Feature
 
-<!-- Please fill in the relevant information below to help triaging your pull request. -->
+<!-- Fill in the relevant information below to help triage your issue. -->
 
 |    Q        |   A
 |------------ | ------

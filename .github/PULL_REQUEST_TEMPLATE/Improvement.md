@@ -5,7 +5,7 @@ about: You have some improvement to make Doctrine better? 🎁
 
 ### Improvement
 
-<!-- Please fill in the relevant information below to help triaging your pull request. -->
+<!-- Fill in the relevant information below to help triage your issue. -->
 
 |    Q        |   A
 |------------ | ------
