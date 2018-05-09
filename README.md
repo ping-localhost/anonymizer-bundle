@@ -27,7 +27,7 @@ I've forked their project and stripped it, so that I could use it to anonymize d
 - [License](#license)
 
 # Installation
-Installation of the bundle can be done using `composer` and is the recommended way of adding the bundle to your application. To do so, in your command line enter the project directory and execute the following command to download the latest stable version of this bundle:
+Installation of the bundle can be done using `composer` and is the recommended way of adding the bundle to your application. To do so, in your command line enter the project directory and run the following command to download the latest stable version of this bundle:
 
 ```bash
 $ composer require ping-localhost/anonymizer-bundle
