@@ -19,6 +19,6 @@ class IncorrectPropertyFaker
 
     public function __construct(string $username)
     {
-        $this->username   = $username;
+        $this->username = $username;
     }
 }

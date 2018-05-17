@@ -26,7 +26,7 @@ class AnonymizedMethodMetadataTest extends TestCase
     protected function setUp(): void
     {
         $this->class = ExampleObject::class;
-        $this->name = 'anonymize';
+        $this->name  = 'anonymize';
 
         $this->metadata = new AnonymizedMethodMetadata($this->class, $this->name);
     }

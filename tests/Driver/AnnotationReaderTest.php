@@ -49,7 +49,7 @@ class AnnotationReaderTest extends TestCase
      */
     public function testGetMethodAnnotation(bool $empty): void
     {
-        $method      = new \ReflectionMethod(ExampleObject::class, 'getUsername');
+        $method     = new \ReflectionMethod(ExampleObject::class, 'getUsername');
         $annotation = $this->prophesize(Anonymize::class)->reveal();
 
         $this->reader->getMethodAnnotations($method)->willReturn($empty ? [] : [$annotation]);
@@ -62,7 +62,7 @@ class AnnotationReaderTest extends TestCase
      */
     public function testGetPropertyAnnotation(bool $empty): void
     {
-        $property      = new \ReflectionProperty(ExampleObject::class, 'username');
+        $property   = new \ReflectionProperty(ExampleObject::class, 'username');
         $annotation = $this->prophesize(Anonymize::class)->reveal();
 
         $this->reader->getPropertyAnnotations($property)->willReturn($empty ? [] : [$annotation]);

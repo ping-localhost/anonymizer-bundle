@@ -23,24 +23,24 @@
         "issues": "https://github.com/ping-localhost/anonymizer-bundle/issues"
     },
     "require": {
-        "php": "^7.1.0",
-        "doctrine/annotations": "^1.6",
-        "doctrine/cache": "^1.7.0",
-        "doctrine/common": "^2.8.0",
-        "fzaninotto/faker": "^1.7",
-        "jms/metadata": "^1.6",
+        "php":                          "^7.1.0",
+        "doctrine/annotations":         "^1.6",
+        "doctrine/cache":               "^1.7.0",
+        "doctrine/common":              "^2.8.0",
+        "fzaninotto/faker":             "^1.7",
+        "jms/metadata":                 "^1.6",
         "symfony/dependency-injection": "~3.4|~4.0",
-        "symfony/framework-bundle": "~3.4|~4.0",
-        "symfony/yaml": "~3.4|~4.0"
+        "symfony/framework-bundle":     "~3.4|~4.0",
+        "symfony/yaml":                 "~3.4|~4.0"
     },
     "require-dev": {
-        "hostnet/phpcs-tool": "^8.0.0",
+        "hostnet/phpcs-tool":              "^8.0.1",
         "jakub-onderka/php-parallel-lint": "^1.0",
-        "nyholm/symfony-bundle-test": "^1.4",
-        "phpstan/phpstan": "^0.9.2",
-        "phpunit/phpunit": "^7.0",
-        "sebastian/phpcpd": "^4.0",
-        "sensiolabs/security-checker": "^4.1"
+        "nyholm/symfony-bundle-test":      "^1.4",
+        "phpstan/phpstan":                 "^0.9.2",
+        "phpunit/phpunit":                 "^7.0",
+        "sebastian/phpcpd":                "^4.0",
+        "sensiolabs/security-checker":     "^4.1"
     },
     "autoload": {
         "psr-4": {
