@@ -12,9 +12,6 @@ This bundle is a stripped down version of the [OrangeRT/AnonymizeBundle](https:/
 
 I've forked their project and stripped it, so that I could use it to anonymize data per class, instead of the whole database.
 
-# Warning
-This project is still a WIP and backwards compatibility breaks might occur until the 1.0 release (which should happen soon).
-
 # Contents
 
 <!-- toc -->
