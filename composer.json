@@ -1,7 +1,10 @@
 {
     "name": "ping-localhost/anonymizer-bundle",
-    "description": "An annotation-based bundle to anonymize sensitive data per entity",
     "type": "symfony-bundle",
+    "description": "An annotation-based bundle to anonymize sensitive data per entity",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": [
         "anonymize",
         "anonymizer",
@@ -9,7 +12,6 @@
         "doctrine"
     ],
     "homepage": "https://github.com/ping-localhost/anonymizer-bundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Mitchell",
@@ -29,9 +31,10 @@
         "doctrine/common":              "^2.8.0",
         "fzaninotto/faker":             "^1.7",
         "jms/metadata":                 "^1.6",
-        "symfony/dependency-injection": "~3.4|~4.0",
-        "symfony/framework-bundle":     "~3.4|~4.0",
-        "symfony/yaml":                 "~3.4|~4.0"
+        "symfony/dependency-injection": "^3.4.12|^4.0.11",
+        "symfony/framework-bundle":     "^3.4.12|^4.0.11",
+        "symfony/http-foundation":      "^3.4.12|^4.0.11",
+        "symfony/yaml":                 "^3.4.12|^4.0.11"
     },
     "require-dev": {
         "hostnet/phpcs-tool":              "^8.0.1",
@@ -43,11 +46,11 @@
         "sensiolabs/security-checker":     "^4.1"
     },
     "conflict": {
-        "symfony/http-foundation": "<3.4.11|<4.0.11|<4.1.0"
+        "paragonie/random_compat": "<2.0.0"
     },
     "autoload": {
         "psr-4": {
-          "PingLocalhost\\AnonymizerBundle\\": "src"
+            "PingLocalhost\\AnonymizerBundle\\": "src"
         }
     },
     "autoload-dev": {
@@ -58,11 +61,6 @@
             "tests/Functional/Fixtures/TestKernel.php"
         ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    },
     "scripts": {
         "ci": [
             "@composer syntax-check",
@@ -71,20 +69,23 @@
             "@composer phpcpd",
             "@composer phpstan"
         ],
-        "phpcpd": "./vendor/bin/phpcpd src/",
-        "phpstan": "./vendor/bin/phpstan analyse --level=4 src",
+        "phpcpd":           "./vendor/bin/phpcpd src/",
+        "phpstan":          "./vendor/bin/phpstan analyse --level=4 src",
         "security-checker": "./vendor/bin/security-checker security:check ./composer.lock --end-point=http://security.sensiolabs.org/check_lock",
         "syntax-check": [
             "./vendor/bin/parallel-lint --exclude vendor .",
-            "vendor/bin/phpcs"
+            "./vendor/bin/phpcs"
         ]
     },
     "scripts-descriptions": {
-        "ci": "Perform continuous integration tasks",
-        "phpcpd": "Detect copy/paste in source code",
-        "phpstan": "Analyze source code",
+        "ci":               "Perform continuous integration tasks",
+        "phpcpd":           "Detect copy/paste in source code",
+        "phpstan":          "Analyze source code",
         "security-checker": "Look for dependencies with known security vulnerabilities",
-        "syntax-check": "Check syntax of source code"
+        "syntax-check":     "Check syntax of source code"
+    },
+    "config": {
+        "sort-packages": true
     },
     "archive": {
         "exclude": [
