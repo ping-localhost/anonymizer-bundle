@@ -3,6 +3,7 @@
 </p>
 
 [![Latest Stable Version](https://poser.pugx.org/ping-localhost/anonymizer-bundle/v/stable.png)](https://packagist.org/packages/ping-localhost/anonymizer-bundle)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=132278432)](https://dependabot.com)
 [![Build Status](https://travis-ci.com/ping-localhost/anonymizer-bundle.svg?branch=master)](https://travis-ci.com/ping-localhost/anonymizer-bundle)
 [![Code coverage](https://codecov.io/gh/ping-localhost/anonymizer-bundle/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ping-localhost/anonymizer-bundle)
 
