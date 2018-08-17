@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \PingLocalhost\AnonymizerBundle\Faker\Generator
- * @covers \PingLocalhost\AnonymizerBundle\Faker\ProviderInterface
  */
 class GeneratorTest extends TestCase
 {
