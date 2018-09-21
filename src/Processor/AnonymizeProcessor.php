@@ -30,7 +30,14 @@ class AnonymizeProcessor
     {
         /** @var AnonymizedClassMetadata $metadata */
         if (null === ($metadata = $this->metadata_factory->getMetadataForClass(\get_class($object)))) {
-            throw new \RuntimeException(sprintf("Couldn't load the metadata for class %s,", \get_class($object)));
+            throw new \RuntimeException(sprintf("Couldn't load the metadata for class %s.", \get_class($object)));
+        }
+
+        if (false === ($metadata instanceof AnonymizedClassMetadata)) {
+            throw new \RuntimeException(sprintf(
+                'We expected to receive a AnonymizedClassMetadata-class, but got %s.',
+                \get_class($metadata)
+            ));
         }
 
         $property_metadata = $this->getPropertyMetadata($metadata);

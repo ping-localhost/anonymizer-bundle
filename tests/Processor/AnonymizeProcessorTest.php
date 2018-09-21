@@ -36,7 +36,7 @@ class AnonymizeProcessorTest extends TestCase
         $this->metadata_factory->getMetadataForClass(EmptyObject::class)->willReturn(null);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(sprintf("Couldn't load the metadata for class %s,", EmptyObject::class));
+        $this->expectExceptionMessage(sprintf("Couldn't load the metadata for class %s.", EmptyObject::class));
 
         $this->anonymize_processor->anonymize($object);
     }
