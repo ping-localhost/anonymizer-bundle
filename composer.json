@@ -30,7 +30,7 @@
         "doctrine/cache":               "^1.8.0",
         "doctrine/common":              "^2.9.0",
         "fzaninotto/faker":             "^1.8.0",
-        "jms/metadata":                 "^1.6.0",
+        "jms/metadata":                 "^2.0.0",
         "symfony/dependency-injection": "^3.4.12|^4.0.11",
         "symfony/framework-bundle":     "^3.4.12|^4.0.11",
         "symfony/http-foundation":      "^3.4.14|^4.0.14|^4.1.3",
