@@ -12,25 +12,6 @@ This bundle is a stripped down version of the [OrangeRT/AnonymizeBundle](https:/
 
 I've forked their project and stripped it, so that I could use it to anonymize data per class, instead of the whole database.
 
-# Contents
-
-<!-- toc -->
-
-- [Installation](#installation)
-  * [Enabling the Bundle without Symfony Flex](#enabling-the-bundle-without-symfony-flex)
-- [Usage](#usage)
-  * [Anonymizing a property](#anonymizing-a-property)
-  * [Anonymizing callback](#anonymizing-callback)
-  * [Unique variables](#unique-variables)
-  * [Excluding objects](#excluding-objects)
-    + [Skipping objects](#skipping-objects)
-- [Faker](#faker)
-  * [Providers](#providers)
-  * [Changing the locale](#changing-the-locale)
-- [License](#license)
-
-<!-- tocstop -->
-
 # Installation
 Installation of the bundle can be done using `composer` and is the recommended way of adding the bundle to your application. To do so, in your command line enter the project directory and run the following command to download the latest stable version of this bundle:
 
