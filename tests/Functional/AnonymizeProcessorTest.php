@@ -21,7 +21,7 @@ class AnonymizeProcessorTest extends KernelTestCase
      */
     private $anonymizer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
 

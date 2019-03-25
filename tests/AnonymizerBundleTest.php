@@ -11,6 +11,9 @@ use PingLocalhost\AnonymizerBundle\Faker\ProviderInterface;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @covers \PingLocalhost\AnonymizerBundle\AnonymizerBundle
+ */
 class AnonymizerBundleTest extends TestCase
 {
     /**

@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "alex": "^7.1.0"
+  },
+  "alex": {
+    "allow": [
+      "whitelist",
+      "blacklist"
+    ]
+  }
+}

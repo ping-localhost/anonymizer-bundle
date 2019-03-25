@@ -1,9 +1,13 @@
+# Folders
+/.idea/
+/var/
+/node_modules/
+/vendor/
+/tests/Functional/var/
+
+# Files
 /.phpcs-cache
 /composer.lock
+/yarn.lock
 /coverage.xml
 /phpunit.xml
-/.idea/
-/.phar/
-/vendor/
-/var/
-/tests/Functional/var/
